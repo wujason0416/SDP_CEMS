@@ -24,7 +24,8 @@ import time
 PORT = '/dev/ttyS0'
 
 # your API key here
-GCP_API_KEY = "a04dc45ce2a2a0c55709125c053a82b4"
+GCP_API_KEY = ""
+API_KEY = "a04dc45ce2a2a0c55709125c053a82b4"
 #remote url
 GCP_CEMS_URL= "http://104.154.116.241/mactronic/input/post.json?node="
 CEMS_URL = "http://220.135.99.159/www/input/post.json?node="
@@ -85,7 +86,7 @@ def main():
 
                 #M1 Battery Single Cell Voltage information
                 print(" ** M1 Battery Single Cell information **")
-                M2_msg = master.execute(DEVICE_ID, cst.READ_INPUT_REGISTERS, 101, 18)
+                M2_msg = master.execute(DEVICE_ID, cst.READ_INPUT_REGISTERS, 101, 16)
                 API_ENDPOINT = CEMS_URL + NODE_NAME + MAC_ADD+"&json={"\
                 +'M1_Reg1: '+str(M1_msg[0]) +','\
                 +'M1_Reg2: '+str(M1_msg[1]) +','\
@@ -102,16 +103,14 @@ def main():
                 +'M1_Reg13: '+str(M1_msg[12]) +','\
                 +'M1_Reg14: '+str(M1_msg[13]) +','\
                 +'M1_Reg15: '+str(M1_msg[14]) +','\
-                +'M1_Reg16: '+str(M1_msg[15]) +','\
-                +'M1_Reg17: '+str(M1_msg[16]) +','\
-                +'M1_Reg18: '+str(M1_msg[17])\
+                +'M1_Reg16: '+str(M1_msg[15]) \
                 +"}&apikey="+API_KEY
                 r = requests.post(url = API_ENDPOINT)
                 time.sleep(5)
 
                 #M2 Battery Single Cell information
                 print(" ** M2 Battery Single Cell information **")
-                M2_msg = master.execute(DEVICE_ID, cst.READ_INPUT_REGISTERS, 201, 18)
+                M2_msg = master.execute(DEVICE_ID, cst.READ_INPUT_REGISTERS, 201, 16)
                 print M2_msg
                 API_ENDPOINT = CEMS_URL + NODE_NAME + MAC_ADD+"&json={"\
                 +'M2_Reg1: '+str(M2_msg[0]) +','\
@@ -129,9 +128,7 @@ def main():
                 +'M2_Reg13: '+str(M2_msg[12]) +','\
                 +'M2_Reg14: '+str(M2_msg[13]) +','\
                 +'M2_Reg15: '+str(M2_msg[14]) +','\
-                +'M1_Reg16: '+str(M2_msg[15]) +','\
-                +'M1_Reg17: '+str(M2_msg[16]) +','\
-                +'M2_Reg18: '+str(M2_msg[17])\
+                +'M2_Reg16: '+str(M2_msg[15]) \
                 +"}&apikey="+API_KEY
                 r = requests.post(url = API_ENDPOINT)
                 time.sleep(5)
@@ -145,14 +142,14 @@ def main():
                 +'Charger_Output_Current: '+str(String_6[1]*0.1)\
                 +"}&apikey="+API_KEY
                 r = requests.post(url = API_ENDPOINT)
-                
+
                         # function code 3 (0x03)
                         #logger.info(master.execute(PLC_DEVICE_ID, cst.READ_HOLDING_REGISTERS, 0, 14))
                         # function code 6 (0x06)
                         #logger.info(master.execute(PLC_DEVICE_ID, cst.WRITE_SINGLE_REGISTER, 100, output_value=54))
                         # function code 16 (0x10)
                         #logger.info(master.execute(PLC_DEVICE_ID, cst.WRITE_MULTIPLE_REGISTERS, 100, output_value=xrange(12)))
- 
+
         except modbus_tk.modbus.ModbusError, e:
             print "Modbus error", e.get_exception_code()
             #pass
