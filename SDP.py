@@ -24,7 +24,7 @@ import time
 PORT = '/dev/ttyS0'
 
 # your API key here
-GCP_API_KEY = ""
+GCP_API_KEY = "b66c94a03e6ab53d3f3ef4a09abee385"
 API_KEY = "a04dc45ce2a2a0c55709125c053a82b4"
 #remote url
 GCP_CEMS_URL= "http://104.154.116.241/mactronic/input/post.json?node="
@@ -86,7 +86,8 @@ def main():
 
                 #M1 Battery Single Cell Voltage information
                 print(" ** M1 Battery Single Cell information **")
-                M2_msg = master.execute(DEVICE_ID, cst.READ_INPUT_REGISTERS, 101, 16)
+                M1_msg = master.execute(DEVICE_ID, cst.READ_INPUT_REGISTERS, 101, 18)
+                print M1_msg                
                 API_ENDPOINT = CEMS_URL + NODE_NAME + MAC_ADD+"&json={"\
                 +'M1_Reg1: '+str(M1_msg[0]) +','\
                 +'M1_Reg2: '+str(M1_msg[1]) +','\
@@ -103,14 +104,16 @@ def main():
                 +'M1_Reg13: '+str(M1_msg[12]) +','\
                 +'M1_Reg14: '+str(M1_msg[13]) +','\
                 +'M1_Reg15: '+str(M1_msg[14]) +','\
-                +'M1_Reg16: '+str(M1_msg[15]) \
+                +'M1_Reg16: '+str(M1_msg[15]) +','\
+                +'M1_Reg17: '+str(M1_msg[16]) +','\                
+                +'M1_Reg18: '+str(M1_msg[17]) \
                 +"}&apikey="+API_KEY
                 r = requests.post(url = API_ENDPOINT)
                 time.sleep(5)
 
                 #M2 Battery Single Cell information
                 print(" ** M2 Battery Single Cell information **")
-                M2_msg = master.execute(DEVICE_ID, cst.READ_INPUT_REGISTERS, 201, 16)
+                M2_msg = master.execute(DEVICE_ID, cst.READ_INPUT_REGISTERS, 201, 18)
                 print M2_msg
                 API_ENDPOINT = CEMS_URL + NODE_NAME + MAC_ADD+"&json={"\
                 +'M2_Reg1: '+str(M2_msg[0]) +','\
@@ -128,7 +131,9 @@ def main():
                 +'M2_Reg13: '+str(M2_msg[12]) +','\
                 +'M2_Reg14: '+str(M2_msg[13]) +','\
                 +'M2_Reg15: '+str(M2_msg[14]) +','\
-                +'M2_Reg16: '+str(M2_msg[15]) \
+                +'M1_Reg16: '+str(M1_msg[15]) +','\
+                +'M1_Reg17: '+str(M1_msg[16]) +','\                
+                +'M2_Reg18: '+str(M2_msg[17]) \
                 +"}&apikey="+API_KEY
                 r = requests.post(url = API_ENDPOINT)
                 time.sleep(5)
