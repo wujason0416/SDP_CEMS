@@ -24,9 +24,11 @@ import time
 PORT = '/dev/ttyS0'
 
 # your API key here
+GCP_API_KEY = "a04dc45ce2a2a0c55709125c053a82b4"
 API_KEY = "b66c94a03e6ab53d3f3ef4a09abee385"
 #remote url
-CEMS_URL= "http://104.154.116.241/mactronic/input/post.json?node="
+GCP_CEMS_URL= "http://104.154.116.241/mactronic/input/post.json?node="
+CEMS_URL = "http://220.135.99.159/www/input/post.json?node="
 NODE_NAME = "SDP_BMS_"
 DEVICE_ID = 1
 
