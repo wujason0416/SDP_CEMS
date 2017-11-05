@@ -27,7 +27,7 @@ import time
 # your API key here
 #API_KEY = "b66c94a03e6ab53d3f3ef4a09abee385"
 #remote url
-#CEMS_URL= "http://104.154.116.241/mactronic/input/post.json?node="
+#CEMS_URL= "http://http://104.155.148.46/mactronic/input/post.json?node="
 #NODE_NAME = "SDP_BMS_"
 #DEVICE_ID = 1
 
