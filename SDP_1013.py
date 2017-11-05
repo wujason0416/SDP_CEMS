@@ -170,8 +170,8 @@ def getMAC(interface='wlan0'):
 
 if __name__ == "__main__":
     cfg = ConfigParser.ConfigParser()
-    with open('/home/l412/SDP_SYSTEM.cfg', 'rb') as fp:
-        cfg.readfp(fp, '/home/l412/SDP_SYSTEM.cfg')
+    with open('/boot/SDP_SYSTEM.cfg', 'rb') as fp:
+        cfg.readfp(fp, '/boot/SDP_SYSTEM.cfg')
 
     host = cfg.get('ModbusTCP','host')
     TCP_port = cfg.get('ModbusTCP','TCP_port')
