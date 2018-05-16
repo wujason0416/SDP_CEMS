@@ -26,7 +26,7 @@ PORT = '/dev/ttyS0'
 # your API key here
 API_KEY = "b66c94a03e6ab53d3f3ef4a09abee385"
 #remote url
-CEMS_URL= "http://104.154.116.241/mactronic/input/post.json?node="
+CEMS_URL= "http://54.186.194.10/mactronic/input/post.json?node="
 NODE_NAME = "SDP_BMS_"
 DEVICE_ID = 1
 
@@ -101,7 +101,7 @@ def main():
                 +'M1_Reg14: '+str(M1_msg[13]) +','\
                 +'M1_Reg15: '+str(M1_msg[14]) +','\
                 +'M1_Reg16: '+str(M1_msg[15]) +','\
-                +'M1_Reg17: '+str(M1_msg[16]) +','\                
+                +'M1_Reg17: '+str(M1_msg[16]) +','\
                 +'M1_Reg18: '+str(M1_msg[17])\
                 +"}&apikey="+API_KEY
                 r = requests.post(url = API_ENDPOINT)
