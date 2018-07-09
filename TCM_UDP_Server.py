@@ -50,7 +50,7 @@ def main():
             file = open("/sys/class/thermal/thermal_zone0/temp")
             temp = float(file.read())/1000
             file.close()
-#            print "CPU temperatre: %0.1f" %temp
+            print "CPU temperatre: %0.1f" %temp
 
             # Send data to CEMS
             API_ENDPOINT = CEMS_URL + "input/post.json?node=" + NODE_NAME + "_" + MAC_ADD + "&json={"\
@@ -61,12 +61,6 @@ def main():
             #receive TCM3001 Periodical UDP Report
             json_string, addr = s.recvfrom(2048)
 
-            #Method 1: PYTHON中将STRING转化为DICT的方法
-#            d = ast.literal_eval(json_string)
-#            print type(d)
-#            print d
-
-            #Method 2: PYTHON中将STRING转化为DICT的方法
             UDP_Report = json.loads(json_string)
 #            print (type(UDP_Report))
 #            print UDP_Report
@@ -75,7 +69,7 @@ def main():
 
 
             if UDP_Report.get("cmd") == "NotifyEnergy" :
-                """
+                
                 print "TCM3001"
                 print("id : " + str(UDP_Report.get("id")) + " tm : " + str(UDP_Report.get("tm")))
                 print("f0 : " + str(UDP_Report.get("f0")) + " ii0 : " + str(UDP_Report.get("ii0")) + " h0 : " + str(UDP_Report.get("h0")) + " vv0 : " + str(UDP_Report.get("vv0"))) 
@@ -93,7 +87,7 @@ def main():
                 print("e0 : " + str(UDP_Report.get("e0")) + " p0 : " + str(UDP_Report.get("p0")) + " r0 : " + str(UDP_Report.get("r0")))
                 print("e1 : " + str(UDP_Report.get("e1")) + " p1 : " + str(UDP_Report.get("p1")) + " r1 : " + str(UDP_Report.get("r1")))
                 print("e2 : " + str(UDP_Report.get("e2")) + " p2 : " + str(UDP_Report.get("p2")) + " r2 : " + str(UDP_Report.get("r2")))
-                """
+                
 
                 #Send Data to CEMS Servr
                 API_ENDPOINT = CEMS_URL + "input/post.json?node=" + NODE_NAME + "_TCM3001_ID_"+str(UDP_Report.get("id")) + "&json={"\
@@ -115,7 +109,7 @@ def main():
                 r = requests.post(url = API_ENDPOINT)
 
             elif UDP_Report.get("cmd") == "NotifySubEnergy":
-                """
+                
                 print "TCM3003" + ", ID= " + str(UDP_Report.get("sub"))
                 print("id : " + str(UDP_Report.get("id")) + " tm : " + str(UDP_Report.get("tm")))
                 print("f0 : " + str(UDP_Report.get("f0")) + " ii0 : " + str(UDP_Report.get("ii0")) + " h0 : " + str(UDP_Report.get("h0")) + " vv0 : " + str(UDP_Report.get("vv0")))
@@ -130,7 +124,7 @@ def main():
                 print("e0 : " + str(UDP_Report.get("e0")) + " p0 : " + str(UDP_Report.get("p0")) + " r0 : " + str(UDP_Report.get("r0")))
                 print("e1 : " + str(UDP_Report.get("e1")) + " p1 : " + str(UDP_Report.get("p1")) + " r1 : " + str(UDP_Report.get("r1")))
                 print("e2 : " + str(UDP_Report.get("e2")) + " p2 : " + str(UDP_Report.get("p2")) + " r2 : " + str(UDP_Report.get("r2")))
-                """
+                
                #Send Data to CEMS Servr
                 API_ENDPOINT = CEMS_URL+"input/post.json?node="+ NODE_NAME + "_TCM3003_ID_"+str(UDP_Report.get("id")) + "_SubID_"+str(UDP_Report.get("sub")+172)+"&json={"\
                 +'f0: '+str(UDP_Report.get("f0"))+','+'f1: '+str(UDP_Report.get("f1"))+','+'f2: '+str(UDP_Report.get("f2"))+','\
